@@ -60,3 +60,39 @@ DML will be used to insert, update, delete and retrieve data. PriceMatchr will u
 
 ### Database Administration 
 Managing PriceMatchr's database includes maintaining performance, handling security and access control, ensuring data integrity and managing backups and recovery. These responsibilities ensure the system remains reliable as more data is added. 
+
+## 9. Entity-Relationship Design
+The ER design for PriceMatchr identifies the main objects in the system and how they relate to one another. This helps define the structure of the database before any tables are created. 
+
+### 9.1 Main Entities 
+The main entities required for PriceMatchr are: 
+- **Product**: Includes information about an item being tracked. Attributes may include ProductID, name, brand and category.
+- **Retailer**: Represents a store or seller that offers a product. Attributes may include RetailerID, store name and location.
+- **PriceRecord**: Stores the price of a specific product at a specific retailer at a specific time. Attributes may include PriceRecordID, price and dataCollected.
+- **UserSearch**: Stores queries or saved items from users. Attributes may include SearchID, query text and timestamp.
+
+### 9.2 Relationships 
+
+- **Product–PriceRecord**: A product can have many price records since its price changes over time and across retailers. Relationship: 1 Product -> Many PriceRecords   
+- **Retailer–PriceRecord**: A retailer can update prices for many products. Relationship: 1 Retailer → Many PriceRecords
+- **Product–Retailer**: A product can appear in many retailers, and a retailer can offer many products. This creates a many-to-many relationship.
+
+### 9.3 Keys and Identifiers
+Each entity must have a unique identifier:
+- ProductID uniquely identifies each product.  
+- RetailerID uniquely identifies each retailer.  
+- PriceRecordID uniquely identifies each price update entry.
+
+### 9.4 Attributes Overview
+This is a simplified attribute list for each entity:
+- **Product:** ProductID (PK), name, brand, category  
+- **Retailer:** RetailerID (PK), storeName, location  
+- **PriceRecord:** PriceRecordID (PK), productID (FK), retailerID (FK), price, dateCollected  
+- **UserSearch:** SearchID (PK), userInput, timestamp  
+
+### 9.5 ER Diagram Summary (Text Description)
+The ER structure of Pricematchr can be thought of as:
+- Product and Retailer are connected through PriceRecord.
+- PriceRecord contains the foreign keys that link it to both Product and Retailer.
+- A many-to-many relationship between Product and Retailer is broken down using PriceRecord.
+- Each entity has a clear primary key to ensure every item can be uniquely identified.
